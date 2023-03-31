@@ -5,29 +5,61 @@ export const useMessageStore = create((set, get) => ({
     {
       id: 78378,
       ia: false,
-      message: "explain quanto compunt in mspter",
+      message: "Hola",
     },
     {
       id: 37832,
       ia: true,
       message:
-        "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "¡Hola! ¿En qué puedo ayudarte hoy en relación a tu negocio y tu rubro?",
     },
     {
       id: 37833,
       ia: false,
-      message: "compunt in mspter",
+      message: "Me gustaría saber mas sobre esta empresa",
     },
     {
       id: 378374,
       ia: true,
       message:
-        "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when antaining Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "Por supuesto, Kleber AI es una empresa de inteligencia artificial que ofrece servicios para ayudar a las empresas a manejar y procesar grandes cantidades de información. Su servicio principal es un chatbot que utiliza tecnología NLP para procesar y responder preguntas en lenguaje natural de los usuarios. Este chatbot puede ser implementado en cualquier negocio que maneje mucha información y desee mejorar la atención al cliente y la eficiencia operativa. Además, Kleber AI ofrece soluciones personalizadas para adaptarse a las necesidades específicas de cada empresa.",
     },
   ],
   error: null,
+  embeddings: [
+    {
+      similarity: 0.8316118423363105,
+      title: "¿Para qué negocio es bueno?",
+      content: "Es bueno para cualquier negocio que maneje mucha información",
+    },
+    {
+      similarity: 0.8205902008550866,
+      title: "Puedo ser un socio tuyo?",
+      content:
+        "Para asociaciones, alianza, marca blanca, etc de momento no estamos interesados, sin embargo si adquieres el servicio podemos estar abiertos a empezar negociaciones, ya que al comprar nuestro servicio nos demuestra más confianza de que la alianza es en serio y tendrá éxito",
+    },
+    {
+      similarity: 0.8143857201904302,
+      title: "Negocio educación",
+      content:
+        "para escuelas y universidad o plataformas online de educación Kleber AI ofrece un servicio para sus estudiantes para que puedan consultar información que enseñan y de su centro educativo",
+    },
+    {
+      similarity: 0.8137208983627641,
+      title: "Negocio de servicios",
+      content:
+        "Kleber AI ofrece buena ayuda a empresas que ofrecen servicios, pues estos suelen tener mucha información que los usuarios necesitan preguntar, Kleber AI es excelente respondiendo con información verídica a los usuarios",
+    },
+    {
+      similarity: 0.8027139806265804,
+      title: "Funciona con productos? ",
+      content:
+        "Kleber AI Si te ayuda para dar información de productos, de hecho con productos es una de las cosas más óptimas, incluso es posible hacer cotizaciones y pedidos para ciertos negocios, el usuario podrá preguntar en lenguaje natural sobre un producto y la AI le dará una respuesta buena, incluso será capaz de recomendar productos o compararlos.",
+    },
+  ],
   sendPrompt: async ({ prompt }) => {
     const messageIAid = get().messages.length + 1;
+    const documentID = get().messages.length + 5;
     /* actualizar el estado de los mensajes
     con el mensaje del usuario y crear 
     un mensaje de la IA vacio
@@ -76,12 +108,15 @@ export const useMessageStore = create((set, get) => ({
           if (entry.id === messageIAid) {
             return {
               ...entry,
-              message: json.response,
+              message: json.response.answer,
             };
           }
           return entry;
         }),
+        embeddings: json.response.embeddings
       }));
+
+    
     } catch (e) {
       console.error("error en messages", e);
     }

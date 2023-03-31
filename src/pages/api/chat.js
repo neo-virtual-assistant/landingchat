@@ -20,7 +20,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         key: `${process.env.API_KEY}`,
         prompt: `${prompt}`,
-        external_user_id: "lastChatSergiio",
+        external_user_id: "lastChatSergiiooo",
       }),
     });
 
@@ -32,8 +32,8 @@ export default async function handler(req, res) {
     }
 
     const json = await response.json();
-    console.log("json chat",json.answer)
-    return res.status(200).json({ response: json.answer });
+    console.log("json chat",json)
+    return res.status(200).json({ response: json });
     
   } catch (e) {
     console.error(e);
