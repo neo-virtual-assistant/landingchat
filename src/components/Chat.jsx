@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { HiArrowCircleDown } from "react-icons/hi";
 import { RiSendPlaneFill } from "react-icons/ri";
 import { Box, Textarea, Button, Text, Flex, Image } from "theme-ui";
-import TypingEffect from "./TypingEffect/TypingEffect";
+import TypingEffect from "./TypingEffect";
 
 function Message({ ia, message }) {
   const textElement = ia ? <TypingEffect text={message} /> : message;
@@ -23,15 +23,15 @@ function Message({ ia, message }) {
         px: 3,
         py: 2,
         display: "table",
-        fontSize: 1,
+        fontSize: [0, 1],
         background: ia ? "backgroundChat" : "primaryGradient",
         color: ia ? "" : "textSecondary",
         marginRight: ia ? "auto" : "",
         marginLeft: ia ? "" : "auto",
-        maxWidth: "240px",
+        maxWidth: ["180px", "200px", "240px"],
       }}
     >
-      <div>{textElement}</div>
+      {textElement}
       <div ref={messagesEndRef} />
     </Box>
   );
@@ -113,7 +113,7 @@ function ChatForm() {
   );
 }
 
-const Chatt = () => {
+const Chat = () => {
   const messages = useMessageStore((state) => state.messages);
 
   return (
@@ -124,9 +124,9 @@ const Chatt = () => {
         maxWidth: "370px",
         border: 2,
         borderColor: "borderColor",
-        gap: "20px",
-        p: "25px",
-        height: "700px",
+        gap: ["10px", "20px"],
+        p: ["10px", "25px"],
+        height: ["auto", "700px"],
         borderRadius: "regular",
         justifyContent: "center",
         width: "370px",
@@ -145,7 +145,7 @@ const Chatt = () => {
             objectFit: "cover",
           }}
         />
-        <Text>ServiceBot</Text>
+        <Text sx={{ fontSize: [0, 1] }}>ServiceBot</Text>
       </Flex>
       <hr style={{ border: "1px solid #3f3f46" }} />
       <Flex
@@ -163,7 +163,7 @@ const Chatt = () => {
             overflowY: "auto",
             height: "90%",
             width: "100%",
-            pr:"5px"
+            pr: "5px",
           }}
         >
           {messages.map((entry) => (
@@ -191,6 +191,7 @@ const Chatt = () => {
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             fontWeight: "bold",
+            fontSize: [0, 1],
           }}
         >
           Documentos usados
@@ -202,13 +203,15 @@ const Chatt = () => {
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
+            width: ["20px", "28px"],
+            height: ["20px", "28px"],
           }}
         >
-          <HiArrowCircleDown style={{ width: "28px", height: "28px" }} />
+          <HiArrowCircleDown style={{ width: "100%", height: "100%" }} />
         </Box>
       </Flex>
     </Flex>
   );
 };
 
-export default Chatt;
+export default Chat;

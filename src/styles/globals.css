@@ -1,66 +1,12 @@
-:root {
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-sans: "Open sans", ui-sans-serif, system-ui;
-  --text-color: #fff;
-  --background: #18181b;
-
-  --font-color: #1f2937;
-
-  --font-light: 300;
-  --font-regular: 400;
-  --font-medium: 500;
-  --font-semibold: 600;
-  --font-bold: 700;
-
-  --backgroundChat: #27272a;
-
-  --pure-color-main:#5EEAD4;
-  --color-second: #bb243a;
-
-  --primary-glow: linear-gradient(
-    307deg,
-    rgba(6, 182, 212, 1) 0%,
-    rgba(94, 234, 212, 1) 100%
-  );
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
-html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  font-family: "Open sans", ui-sans-serif, system-ui;
 }
-
-body {
-  color: var(--text-color);
-  background: var(--background);
-  font-family: var(--font-sans);
-}
-
-button {
-  background: none;
-  color: inherit;
-  border: none;
-  font: inherit;
-  cursor: pointer;
-}
-
-li {
-  list-style-type: none;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-
 
 *::-webkit-scrollbar-track {
   background: black;

@@ -1,7 +1,7 @@
-import Navbarr from "@/components/Navbarr";
+import Navbar from "@/components/Navbar";
 import { Box, ThemeProvider } from "theme-ui";
 import { myTheme } from "@/theme-ui";
-import Headerr from "@/components/Headerr";
+import Header from "@/components/Header";
 import { Layout } from "@/components/Layout";
 
 export default function Home() {
@@ -9,8 +9,8 @@ export default function Home() {
     <ThemeProvider theme={myTheme}>
       <Layout>
         <Box as="main" sx={{ m: "0 auto", maxWidth: "container", p: "0 20px" }}>
-          <Navbarr />
-          <Headerr />
+          <Navbar />
+          <Header />
         </Box>
       </Layout>
     </ThemeProvider>

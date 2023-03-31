@@ -1,15 +1,10 @@
-import styles from "./TypingEffect.module.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { Text } from "theme-ui";
 
-const useTypingEffect = ({text}) => {
+const useTypingEffect = ({ text }) => {
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showCursor, setShowCursor] = useState(true);
-
-  const messagesEndRe = useRef(null);
-  const scrollToBottom = () => {
-    messagesEndRe.current?.scrollIntoView({ behavior: "smooth" });
-  };
 
   useEffect(() => {
     if (!text?.length) return;
@@ -34,31 +29,29 @@ const useTypingEffect = ({text}) => {
       setCurrentIndex(currentIndex + 1);
     }, randomTime);
 
-    
-    console.log("se ejecutó")
-    scrollToBottom ();
     return () => {
       clearInterval(intervalId);
     };
   }, [text, currentIndex]);
 
-  useEffect(() => {
-    
-    scrollToBottom ();
-    console.log("se ejecutó")
-  }, [currentIndex])
-  
-
   return { displayText, showCursor };
 };
 
 const TypingEffect = ({ text }) => {
-  const { displayText, showCursor, messagesEndRe } = useTypingEffect({text});
+  const { displayText, showCursor } = useTypingEffect({ text });
 
   return (
-    <span className={`${showCursor ? styles.showCursor : ""}`} ref={messagesEndRe}>
+    <Text
+      sx={{
+        "&::after": {
+          content: showCursor ? '"▋"' : '""',
+          ml: showCursor ? 1 : "",
+          animate: showCursor ? "typing" : "",
+        },
+      }}
+    >
       {displayText}
-    </span>
+    </Text>
   );
 };
 

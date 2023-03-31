@@ -1,6 +1,6 @@
 export const myTheme = {
   // Breakpoints
-  breakpoints: ["40em", "52em", "64em"],
+  breakpoints: ["320px", "410px", "768px"],
 
   // Colors
   colors: {
@@ -34,7 +34,7 @@ export const myTheme = {
 
   // Fonts
   fonts: {
-    body: '"Open sans", ui-sans-serif, system-ui',
+    body: 'Open sans, ui-sans-serif, system-ui',
     heading: "inherit",
   },
 
@@ -96,6 +96,17 @@ export const myTheme = {
 
   // Z-index
   zIndices: [0, 1, 2, 3, 4, 5],
+
+
+  animation: {
+    typing: 'blink 1s steps(5, start) infinite',
+  },
+  
+  keyframes: {
+    blink: {
+      to: { visibility: 'hidden' },
+    },
+  },
 
   styles: {
     root: {

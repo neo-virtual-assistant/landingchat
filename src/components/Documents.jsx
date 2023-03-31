@@ -1,13 +1,10 @@
-import documentsLocal from "../mocks/saberMas.json";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import styles from "./Documents/Documents.module.css";
 import { useState } from "react";
 import { useMessageStore } from "@/store/messages";
 import { Button, Flex, Heading, Text } from "theme-ui";
 import { IoMdChatboxes } from "react-icons/io";
 
 const DataOfEmbedding = ({ title, content, similarity, user_id }) => {
-    console.log(title)
   const [isOpen, setIsOpen] = useState(false);
   const [idSubtitle, setIdSubtitle] = useState("");
 
@@ -18,40 +15,65 @@ const DataOfEmbedding = ({ title, content, similarity, user_id }) => {
 
   return (
     <Flex
-      sx={{ flexDirection: "column", gap: "20px", maxWidth: "350px" }}
+      sx={{
+        flexDirection: "column",
+        gap: ["10px", null, "20px"],
+        maxWidth: "350px",
+      }}
     >
       <Button
-        className={styles.dataWrapped}
         onClick={() => handleClick(user_id)}
-        sx={{ bg:"background"}}
+        sx={{
+          bg: "background",
+          py: 2,
+          px: 3,
+          "&:hover": { bg: "backgroundChat", borderRadius: "full" },
+        }}
       >
-        <div className={styles.dataSubtitle}>
-          <BsThreeDotsVertical className={styles.iconDot} />
-          <h2 className={styles.subTitles}>{title}</h2>
-        </div>
+        <Flex sx={{ gap: "10px", alignItems: "flex-start" }}>
+          <BsThreeDotsVertical
+            style={{ height: "20px", width: "20px", minWidth: "20px" }}
+          />
+          <Heading
+            as="h2"
+            sx={{
+              fontSize: [0, 1, 2, 2],
+              display: "flex",
+              textAlign: "left",
+              lineHeight: "20px",
+            }}
+          >
+            {title}
+          </Heading>
+        </Flex>
       </Button>
       {isOpen && user_id == idSubtitle && (
-        <div className={styles.dataUsedWrapped}>
-          <p>{content}</p>
-          <span>Similitud: {similarity}</span>
-        </div>
+        <Flex sx={{ flexDirection: "column", fontSize: 1, gap: "20px" }}>
+          <Text as="p">{content}</Text>
+          <Text
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              fontWeight: "semibold",
+            }}
+          >
+            Similitud: {similarity}
+          </Text>
+        </Flex>
       )}
     </Flex>
   );
 };
 
-const Documentss = () => {
-
+const Documents = () => {
   const embeddings = useMessageStore((state) => state.embeddings);
-
-  console.log(embeddings)
 
   return (
     <Flex sx={{ gap: "40px", flexDirection: "column" }}>
       <Heading
         as="h1"
         sx={{
-          fontSize: 6,
+          fontSize: [4, 5, 6, 6],
           background: "primaryGradient",
           backgroundClip: "text",
           WebkitBackgroundClip: "text",
@@ -60,17 +82,19 @@ const Documentss = () => {
       >
         Documentos Usados
       </Heading>
-      {embeddings.map((entry, i) => (
-        <DataOfEmbedding key={i} {...entry} />
-      ))}
+      <Flex sx={{ flexDirection: "column", gap: "20px" }}>
+        {embeddings.map((entry, i) => (
+          <DataOfEmbedding key={i} {...entry} />
+        ))}
+      </Flex>
       <Flex
         sx={{
           alignItems: "center",
           gap: "20px",
           background: "primaryGradient",
           color: "textSecondary",
-          py: 3,
-          px: 4,
+          py: [2, 3],
+          px: [3, 4],
           borderRadius: "full",
           maxWidth: "420px",
         }}
@@ -78,7 +102,7 @@ const Documentss = () => {
         <IoMdChatboxes
           style={{ width: "30px", height: "auto", minWidth: "30px" }}
         />
-        <Text sx={{ fontSize: 0, fontWeight: "bold" }}>
+        <Text sx={{ fontSize: ["11px", 0], fontWeight: "bold" }}>
           Consulta a nuestro asistente virtual para más información sobre
           nuestra empresa.
         </Text>
@@ -87,4 +111,4 @@ const Documentss = () => {
   );
 };
 
-export default Documentss;
+export default Documents;
