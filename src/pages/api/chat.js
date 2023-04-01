@@ -1,11 +1,7 @@
 export default async function handler(req, res) {
 
   if (req.method !== "POST") return res.status(405).end();
-
   const { prompt } = JSON.parse(req.body);
-
-  console.log("req.body chat", req.body)
-  console.log("prompt chat", prompt)
 
   if (!prompt) {
     return res.status(400).json({ error: "Prompt is required" });
@@ -20,11 +16,9 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         key: `${process.env.API_KEY}`,
         prompt: `${prompt}`,
-        external_user_id: "lastChatSergiiooo",
+        external_user_id: "chatstart",
       }),
     });
-
-    console.log("response chat", response)
 
     if (!response.ok) {
       console.error(response.statusText);
@@ -32,7 +26,6 @@ export default async function handler(req, res) {
     }
 
     const json = await response.json();
-    console.log("json chat",json)
     return res.status(200).json({ response: json });
     
   } catch (e) {

@@ -1,5 +1,4 @@
 import { useMessageStore } from "@/store/messages";
-import { useMessageStoree } from "@/store/testmesa";
 import { useEffect, useRef } from "react";
 import { HiArrowCircleDown } from "react-icons/hi";
 import { RiSendPlaneFill } from "react-icons/ri";
@@ -39,12 +38,11 @@ function Message({ ia, message }) {
 }
 
 function ChatForm() {
-  const sendPrompt = useMessageStoree((state) => state.sendPrompt);
+  const sendPrompt = useMessageStore((state) => state.sendPrompt);
   const textAreaRef = useRef();
 
   const handleSubmit = () => {
     const { value } = textAreaRef.current;
-    console.log(value);
     sendPrompt({ prompt: value });
     textAreaRef.current.value = "";
   };
@@ -115,8 +113,7 @@ function ChatForm() {
 }
 
 const Chat = () => {
-  const messages = useMessageStoree((state) => state.messages);
-
+  const messages = useMessageStore((state) => state.messages);
   return (
     <Flex
       as="aside"
