@@ -8,6 +8,10 @@ body {
   font-family: "Open sans", ui-sans-serif, system-ui;
 }
 
+button {
+  cursor: pointer;
+}
+
 *::-webkit-scrollbar-track {
   background: black;
   border-radius: 15px;
@@ -23,6 +27,6 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-  background: var(--primary-glow);
+  background: linear-gradient(307deg, rgba(6, 182, 212, 1) 0%, rgba(94, 234, 212, 1) 100%);
   border-radius: 7px;
 }

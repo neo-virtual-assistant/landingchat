@@ -1,8 +1,9 @@
 import { useMessageStore } from "@/store/messages";
+import { useMessageStoree } from "@/store/testmesa";
 import { useEffect, useRef } from "react";
 import { HiArrowCircleDown } from "react-icons/hi";
 import { RiSendPlaneFill } from "react-icons/ri";
-import { Box, Textarea, Button, Text, Flex, Image } from "theme-ui";
+import { Box, Textarea, Text, Flex, Image, IconButton } from "theme-ui";
 import TypingEffect from "./TypingEffect";
 
 function Message({ ia, message }) {
@@ -38,7 +39,7 @@ function Message({ ia, message }) {
 }
 
 function ChatForm() {
-  const sendPrompt = useMessageStore((state) => state.sendPrompt);
+  const sendPrompt = useMessageStoree((state) => state.sendPrompt);
   const textAreaRef = useRef();
 
   const handleSubmit = () => {
@@ -84,7 +85,7 @@ function ChatForm() {
             tabIndex={0}
             autoFocus
             defaultValue=""
-            placeholder="Aa"
+            placeholder="Envia un mensaje"
             sx={{
               border: "light",
               borderColor: "borderColor",
@@ -93,7 +94,7 @@ function ChatForm() {
               borderRadius: "regular",
             }}
           />
-          <Button
+          <IconButton
             type="submit"
             sx={{
               position: "absolute",
@@ -106,7 +107,7 @@ function ChatForm() {
             }}
           >
             <RiSendPlaneFill style={{ height: "22px", width: "100%" }} />
-          </Button>
+          </IconButton>
         </Box>
       </Box>
     </Flex>
@@ -114,7 +115,7 @@ function ChatForm() {
 }
 
 const Chat = () => {
-  const messages = useMessageStore((state) => state.messages);
+  const messages = useMessageStoree((state) => state.messages);
 
   return (
     <Flex

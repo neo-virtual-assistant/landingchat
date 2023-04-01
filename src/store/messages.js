@@ -59,7 +59,6 @@ export const useMessageStore = create((set, get) => ({
   ],
   sendPrompt: async ({ prompt }) => {
     const messageIAid = get().messages.length + 1;
-    const documentID = get().messages.length + 5;
     /* actualizar el estado de los mensajes
     con el mensaje del usuario y crear 
     un mensaje de la IA vacio
