@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { v4 as uuidv4 } from 'uuid'
 
 const messageStorePersistConfig = {
   name: "conversations",
@@ -66,8 +67,10 @@ export const useMessageStore = create(
             "Kleber AI Si te ayuda para dar información de productos, de hecho con productos es una de las cosas más óptimas, incluso es posible hacer cotizaciones y pedidos para ciertos negocios, el usuario podrá preguntar en lenguaje natural sobre un producto y la AI le dará una respuesta buena, incluso será capaz de recomendar productos o compararlos.",
         },
       ],
+      externalID: uuidv4(),
       sendPrompt: async ({ prompt }) => {
         const messageIAid = get().messages.length + 1;
+        const userID = get().externalID
 
         set((state) => ({
           messages: [
@@ -90,7 +93,7 @@ export const useMessageStore = create(
             method: "POST",
             body: JSON.stringify({
               prompt: `${prompt}`,
-              external_user_id: "sergioD",
+              external_user_id: `${userID}`,
             }),
           });
 

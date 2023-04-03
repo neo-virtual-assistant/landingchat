@@ -113,7 +113,9 @@ function ChatForm() {
 }
 
 const Chat = () => {
+
   const messages = useMessageStore((state) => state.messages);
+  
   return (
     <Flex
       as="aside"

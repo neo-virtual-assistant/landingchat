@@ -83,8 +83,8 @@ const Documents = () => {
         Documentos Usados
       </Heading>
       <Flex sx={{ flexDirection: "column", gap: "20px" }}>
-        {embeddings.map((entry, i) => (
-          <DataOfEmbedding key={i} {...entry} />
+        {embeddings.map((entry) => (
+          <DataOfEmbedding key={entry.similarity + entry.content.length} {...entry} />
         ))}
       </Flex>
       <Flex
