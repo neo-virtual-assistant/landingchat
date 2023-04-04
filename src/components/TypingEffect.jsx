@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Text } from "theme-ui";
 
-const useTypingEffect = ({ text }) => {
+const useTypingEffect = ({ text, scrollToBottom }) => {
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showCursor, setShowCursor] = useState(true);
@@ -29,6 +29,8 @@ const useTypingEffect = ({ text }) => {
       setCurrentIndex(currentIndex + 1);
     }, randomTime);
 
+    scrollToBottom();
+
     return () => {
       clearInterval(intervalId);
     };
@@ -37,8 +39,8 @@ const useTypingEffect = ({ text }) => {
   return { displayText, showCursor };
 };
 
-const TypingEffect = ({ text }) => {
-  const { displayText, showCursor } = useTypingEffect({ text });
+const TypingEffect = ({ text, scrollToBottom }) => {
+  const { displayText, showCursor } = useTypingEffect({ text, scrollToBottom });
 
   return (
     <Text

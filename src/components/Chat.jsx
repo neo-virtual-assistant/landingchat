@@ -6,12 +6,16 @@ import { Box, Textarea, Text, Flex, Image, IconButton } from "theme-ui";
 import TypingEffect from "./TypingEffect";
 
 function Message({ ia, message }) {
-  const textElement = ia ? <TypingEffect text={message} /> : message;
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-
+  const textElement = ia ? (
+    <TypingEffect text={message} scrollToBottom={scrollToBottom} />
+  ) : (
+    message
+  );
+  
   useEffect(() => {
     scrollToBottom();
   }, [message]);
@@ -29,6 +33,7 @@ function Message({ ia, message }) {
         marginRight: ia ? "auto" : "",
         marginLeft: ia ? "" : "auto",
         maxWidth: ["180px", "200px", "240px"],
+        my:"5px"
       }}
     >
       {textElement}
@@ -113,9 +118,8 @@ function ChatForm() {
 }
 
 const Chat = () => {
-
   const messages = useMessageStore((state) => state.messages);
-  
+
   return (
     <Flex
       as="aside"

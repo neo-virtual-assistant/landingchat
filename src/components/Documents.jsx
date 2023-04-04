@@ -90,7 +90,7 @@ const Documents = () => {
           gap: ["10px","10px","20px"],
           height: "auto",
           width: "100%",
-          overflowX: ["auto", null, "none", "none"],
+          overflowX: ["auto", null, null, "none"],
           p:"10px"
         }}
       >
