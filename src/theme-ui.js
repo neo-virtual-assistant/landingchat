@@ -1,6 +1,6 @@
 export const myTheme = {
   // Breakpoints
-  breakpoints: ["320px", "410px", "768px"],
+  breakpoints: ["320px", "416px", "768px"],
 
   // Colors
   colors: {

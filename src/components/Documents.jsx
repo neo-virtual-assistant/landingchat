@@ -1,7 +1,7 @@
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useState } from "react";
 import { useMessageStore } from "@/store/messages";
-import { Button, Flex, Heading, Text } from "theme-ui";
+import { Box, Button, Flex, Heading, Text } from "theme-ui";
 import { IoMdChatboxes } from "react-icons/io";
 
 const DataOfEmbedding = ({ title, content, similarity, user_id }) => {
@@ -17,38 +17,40 @@ const DataOfEmbedding = ({ title, content, similarity, user_id }) => {
     <Flex
       sx={{
         flexDirection: "column",
-        gap: ["10px", null, "20px"],
-        maxWidth: "350px",
+        gap: ["10px","10px","10px","20px"],
+        minWidth: "300px"
       }}
     >
       <Button
         onClick={() => handleClick(user_id)}
         sx={{
-          bg: "background",
-          py: 2,
-          px: 3,
+          display: "flex",
+          borderRadius: "full",
+          bg: ["backgroundChat", "backgroundChat", "backgroundChat","background"],
+          p:"10px 15px",
           "&:hover": { bg: "backgroundChat", borderRadius: "full" },
+          gap: "10px",
+          alignItems: "flex-start",
+          width: "auto",
         }}
       >
-        <Flex sx={{ gap: "10px", alignItems: "flex-start" }}>
-          <BsThreeDotsVertical
-            style={{ height: "20px", width: "20px", minWidth: "20px" }}
-          />
-          <Heading
-            as="h2"
-            sx={{
-              fontSize: [0, 1, 2, 2],
-              display: "flex",
-              textAlign: "left",
-              lineHeight: "20px",
-            }}
-          >
-            {title}
-          </Heading>
-        </Flex>
+        <BsThreeDotsVertical
+          style={{ height: "20px", width: "20px", minWidth: "20px" }}
+        />
+        <Heading
+          as="h2"
+          sx={{
+            fontSize: [0, 1, 2, 2],
+            display: "flex",
+            textAlign: "left",
+            lineHeight: "20px",
+          }}
+        >
+          {title}
+        </Heading>
       </Button>
       {isOpen && user_id == idSubtitle && (
-        <Flex sx={{ flexDirection: "column", fontSize: 1, gap: "20px" }}>
+        <Flex sx={{ flexDirection: "column", fontSize: 1, gap: "20px", p:"0px 20px"}}>
           <Text as="p">{content}</Text>
           <Text
             sx={{
@@ -82,9 +84,21 @@ const Documents = () => {
       >
         Documentos Usados
       </Heading>
-      <Flex sx={{ flexDirection: "column", gap: "20px" }}>
+      <Flex
+        sx={{
+          flexDirection: ["row", null, null, "column"],
+          gap: ["10px","10px","20px"],
+          height: "auto",
+          width: "100%",
+          overflowX: ["auto", null, "none", "none"],
+          p:"10px"
+        }}
+      >
         {embeddings.map((entry) => (
-          <DataOfEmbedding key={entry.similarity + entry.content.length} {...entry} />
+          <DataOfEmbedding
+            key={entry.similarity + entry.content.length}
+            {...entry}
+          />
         ))}
       </Flex>
       <Flex
