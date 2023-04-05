@@ -1,15 +1,13 @@
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useState } from "react";
 import { useMessageStore } from "@/store/messages";
-import { Box, Button, Flex, Heading, Text } from "theme-ui";
+import { Button, Flex, Heading, Text } from "theme-ui";
 import { IoMdChatboxes } from "react-icons/io";
 
-const DataOfEmbedding = ({ title, content, similarity, user_id }) => {
+const DataOfEmbedding = ({ title, content, similarity }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [idSubtitle, setIdSubtitle] = useState("");
 
-  const handleClick = (v) => {
-    setIdSubtitle(v);
+  const handleClick = () => {
     setIsOpen(!isOpen);
   };
 
@@ -18,11 +16,12 @@ const DataOfEmbedding = ({ title, content, similarity, user_id }) => {
       sx={{
         flexDirection: "column",
         gap: ["10px","10px","10px","20px"],
-        minWidth: "300px"
+        minWidth: "300px",
+        maxWidth: "350px"
       }}
     >
       <Button
-        onClick={() => handleClick(user_id)}
+        onClick={() => handleClick()}
         sx={{
           display: "flex",
           borderRadius: "full",
@@ -49,7 +48,7 @@ const DataOfEmbedding = ({ title, content, similarity, user_id }) => {
           {title}
         </Heading>
       </Button>
-      {isOpen && user_id == idSubtitle && (
+      {isOpen && (
         <Flex sx={{ flexDirection: "column", fontSize: 1, gap: "20px", p:"0px 20px"}}>
           <Text as="p">{content}</Text>
           <Text
@@ -69,6 +68,7 @@ const DataOfEmbedding = ({ title, content, similarity, user_id }) => {
 
 const Documents = () => {
   const embeddings = useMessageStore((state) => state.embeddings);
+  
 
   return (
     <Flex sx={{ gap: "40px", flexDirection: "column" }}>

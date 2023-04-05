@@ -1,24 +1,12 @@
 import { useMessageStore } from "@/store/messages";
 import { useEffect, useRef } from "react";
-import { HiArrowCircleDown } from "react-icons/hi";
+import { HiTrash } from "react-icons/hi";
 import { RiSendPlaneFill } from "react-icons/ri";
-import { Box, Textarea, Text, Flex, Image, IconButton } from "theme-ui";
+import { Box, Textarea, Text, Flex, Image, IconButton, Button } from "theme-ui";
 import TypingEffect from "./TypingEffect";
 
-function Message({ ia, message }) {
-  const messagesEndRef = useRef(null);
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-  const textElement = ia ? (
-    <TypingEffect text={message} scrollToBottom={scrollToBottom} />
-  ) : (
-    message
-  );
-  
-  useEffect(() => {
-    scrollToBottom();
-  }, [message]);
+function Message({ ia, message,scrollToBottom }) {
+  const textElement = ia ? <TypingEffect text={message} scrollToBottom={scrollToBottom} /> : message;
 
   return (
     <Box
@@ -33,11 +21,9 @@ function Message({ ia, message }) {
         marginRight: ia ? "auto" : "",
         marginLeft: ia ? "" : "auto",
         maxWidth: ["180px", "200px", "240px"],
-        my:"5px"
       }}
     >
       {textElement}
-      <div ref={messagesEndRef} />
     </Box>
   );
 }
@@ -119,6 +105,16 @@ function ChatForm() {
 
 const Chat = () => {
   const messages = useMessageStore((state) => state.messages);
+  const clearHistory = useMessageStore((state) => state.clearHistory);
+
+  const messagesEndRef = useRef(null);
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView(false, { behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   return (
     <Flex
@@ -170,36 +166,30 @@ const Chat = () => {
             pr: "5px",
           }}
         >
-          {messages.map((entry) => (
-            <Message key={entry.id} {...entry} />
+          {messages.map((entry, i) => (
+            <Message key={entry.id + i} {...entry} scrollToBottom={scrollToBottom} />
           ))}
+          <div ref={messagesEndRef} />
         </Flex>
         <ChatForm />
       </Flex>
-      <Flex
+      <Button
+        onClick={() => clearHistory()}
         sx={{
+          display: "flex",
           alignItems: "center",
-          justifyContent: "space-around",
+          justifyContent: "center",
           border: 1,
           borderColor: "secondary",
           p: "10px",
           width: "100%",
           minHeight: "55px",
           borderRadius: "light",
+          gap: "10px",
+          bg: "background",
+          "&:hover": { bg: "backgroundChat" },
         }}
       >
-        <Text
-          sx={{
-            background: "primaryGradient",
-            backgroundClip: "text",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            fontWeight: "bold",
-            fontSize: [0, 1],
-          }}
-        >
-          Documentos usados
-        </Text>
         <Box
           sx={{
             color: "secondary",
@@ -207,13 +197,25 @@ const Chat = () => {
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            width: ["20px", "28px"],
-            height: ["20px", "28px"],
+            width: ["18px", "25px"],
+            height: ["18px", "25px"],
           }}
         >
-          <HiArrowCircleDown style={{ width: "100%", height: "100%" }} />
+          <HiTrash style={{ width: "100%", height: "100%" }} />
         </Box>
-      </Flex>
+        <Text
+          sx={{
+            background: "primaryGradient",
+            backgroundClip: "text",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            fontWeight: "semibold",
+            fontSize: [0, 1],
+          }}
+        >
+          Limpiar Historial
+        </Text>
+      </Button>
     </Flex>
   );
 };

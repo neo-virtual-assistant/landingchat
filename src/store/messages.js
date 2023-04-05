@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from "uuid";
 
 const messageStorePersistConfig = {
   name: "conversations",
@@ -21,17 +21,6 @@ export const useMessageStore = create(
           ia: true,
           message:
             "¡Hola! ¿En qué puedo ayudarte hoy en relación a tu negocio y tu rubro?",
-        },
-        {
-          id: 37833,
-          ia: false,
-          message: "Me gustaría saber mas sobre esta empresa",
-        },
-        {
-          id: 378374,
-          ia: true,
-          message:
-            "Por supuesto, Kleber AI es una empresa de inteligencia artificial que ofrece servicios para ayudar a las empresas a manejar y procesar grandes cantidades de información. Su servicio principal es un chatbot que utiliza tecnología NLP para procesar y responder preguntas en lenguaje natural de los usuarios. Este chatbot puede ser implementado en cualquier negocio que maneje mucha información y desee mejorar la atención al cliente y la eficiencia operativa. Además, Kleber AI ofrece soluciones personalizadas para adaptarse a las necesidades específicas de cada empresa.",
         },
       ],
       error: null,
@@ -68,9 +57,18 @@ export const useMessageStore = create(
         },
       ],
       externalID: uuidv4(),
+      clearHistory: () => {
+        set(() => ({
+          messages: [],
+          embeddings: [],
+          externalID: null,
+        }));
+      },
       sendPrompt: async ({ prompt }) => {
         const messageIAid = get().messages.length + 1;
-        const userID = get().externalID
+        let userID = get().externalID;
+
+        !userID ? (userID = uuidv4()) : userID;
 
         set((state) => ({
           messages: [
@@ -86,6 +84,7 @@ export const useMessageStore = create(
               message: "",
             },
           ],
+          externalID: userID,
         }));
 
         try {
@@ -93,7 +92,7 @@ export const useMessageStore = create(
             method: "POST",
             body: JSON.stringify({
               prompt: `${prompt}`,
-              external_user_id: `${userID}`,
+              external_user_id: `web-${userID}`,
             }),
           });
 

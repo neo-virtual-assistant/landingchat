@@ -40,7 +40,7 @@ const useTypingEffect = ({ text, scrollToBottom }) => {
 };
 
 const TypingEffect = ({ text, scrollToBottom }) => {
-  const { displayText, showCursor } = useTypingEffect({ text, scrollToBottom });
+  const { displayText, showCursor } = useTypingEffect({ text, scrollToBottom});
 
   return (
     <Text

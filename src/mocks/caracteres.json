@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "simple y al grano",
+    "content": "Tus clientes quieren comprar y tu quieres vender, la mayoría de tiendas online dan rodeos y tienen elementos innecesarios, WhatShop va al grano"
+  },
+  {
+    "id": 2,
+    "title": "Tu propio sitio web",
+    "content": "Es tu propia tienda online individual y privada, no es una plataforma donde hay varios negocios, es una plataforma dedicada unicamente para tu negocio con tu logo y nombre"
+  },
+  {
+    "id": 3,
+    "title": "Simple Whatsapp",
+    "content": "Deja los sistemas complicados, whatsapp es la forma más sencilla de comunicarse con los clientes, whatShop permite que los pedidos te llegan al whatsapp"
+  },
+  {
+    "id": 4,
+    "title": "App Progresiva PWA",
+    "content": "WhatShop también te permite tener tu propia aplicación móvil"
+  },
+  {
+    "id": 5,
+    "title": "Simple administración",
+    "content": "Sube tus productos de forma simple"
+  },
+  {
+    "id": 6,
+    "title": "Sitio web veloz",
+    "content": "La mayoría de sitios web cargan lento, WhatShop es instantáneo y permite una navegación cómoda"
+  },
+  {
+    "id": 7,
+    "title": "Instalación rápida",
+    "content": "Te lo instalamos en una hora, la mayoría de sitios web tardan semanas en estar listas (y con fallos)"
+  },
+  {
+    "id": 8,
+    "title": "Escalable",
+    "content": "Otros servicios ofrecen una tienda online que nunca más será actualizada, WhatShop cada vez tiene más beneficios y al mismo precio"
+  },
+  {
+    "id": 9,
+    "title": "Soporte técnico",
+    "content": "Soporte técnico de bugs y asesoría"
+  },
+  {
+    "id": 10,
+    "title": "Conecta Google Sheet",
+    "content": "Todos tus pedidos se registrarán automáticamente en una hoja de Google Sheet (excel)"
+  },
+  {
+    "id": 11,
+    "title": "Pixel de Facebook",
+    "content": "Instalación de tu pixel de Facebook, para medir estadísticas de tu sitio web y hacer re-marketing en Facebook"
+  },
+  {
+    "id": 12,
+    "title": "Multi Líneas Whatsapp",
+    "content": "Con WhatShop una misma tienda online puede recibir pedidos a distintos números de whatsapp, muy útil para negocios con varios vendedores"
+  }
+]
