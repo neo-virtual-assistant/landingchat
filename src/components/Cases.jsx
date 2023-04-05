@@ -26,7 +26,7 @@ const cardsUse = [
 
 const Cases = () => {
   return (
-    <Box as="section" sx={{ p: "100px 0px" }}>
+    <Box as="section" sx={{ p: "20px 0px 100px" }}>
       <Heading
         as="h3"
         sx={{ mb: "60px", display: "inline-block", fontSize: [4, 5, 5, 5] }}

@@ -4,7 +4,6 @@ export const myTheme = {
 
   // Colors
   colors: {
-
     text: "#fff",
     textSecondary: "#18181b",
 
@@ -34,7 +33,7 @@ export const myTheme = {
 
   // Fonts
   fonts: {
-    body: 'Open sans, ui-sans-serif, system-ui',
+    body: "Open sans, ui-sans-serif, system-ui",
     heading: "inherit",
   },
 
@@ -84,7 +83,7 @@ export const myTheme = {
     light: "7px",
     regular: "14px",
     bold: "21px",
-    full: "1000px"
+    full: "1000px",
   },
 
   // Shadows
@@ -97,15 +96,8 @@ export const myTheme = {
   // Z-index
   zIndices: [0, 1, 2, 3, 4, 5],
 
-
   animation: {
-    typing: 'blink 1s steps(5, start) infinite',
-  },
-  
-  keyframes: {
-    blink: {
-      to: { visibility: 'hidden' },
-    },
+    typing: "blink 1s steps(5, start) infinite",
   },
 
   styles: {
@@ -132,10 +124,10 @@ export const myTheme = {
     },
     mainTitle: {
       fontSize: 6,
-      background: 'primaryGlow',
-      backgroundClip: 'text',
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
+      background: "primaryGlow",
+      backgroundClip: "text",
+      WebkitBackgroundClip: "text",
+      WebkitTextFillColor: "transparent",
     },
   },
 

@@ -8,13 +8,13 @@ const Header = () => {
       as="section"
       sx={{
         justifyContent: "center",
-        gap: ["60px", "70px", "120px"],
-        m: "80px 0px",
+        gap: ["10px", "20px","20px", "120px"],
+        m: ["0px","","","60px 0px"],
         flexWrap: "wrap",
       }}
     >
-      <Documents />
       <Chat />
+      <Documents />
     </Flex>
   );
 };

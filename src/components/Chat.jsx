@@ -5,8 +5,12 @@ import { RiSendPlaneFill } from "react-icons/ri";
 import { Box, Textarea, Text, Flex, Image, IconButton, Button } from "theme-ui";
 import TypingEffect from "./TypingEffect";
 
-function Message({ ia, message,scrollToBottom }) {
-  const textElement = ia ? <TypingEffect text={message} scrollToBottom={scrollToBottom} /> : message;
+function Message({ ia, message, scrollToBottom }) {
+  const textElement = ia ? (
+    <TypingEffect text={message} scrollToBottom={scrollToBottom} />
+  ) : (
+    message
+  );
 
   return (
     <Box
@@ -32,7 +36,8 @@ function ChatForm() {
   const sendPrompt = useMessageStore((state) => state.sendPrompt);
   const textAreaRef = useRef();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e?.preventDefault();
     const { value } = textAreaRef.current;
     sendPrompt({ prompt: value });
     textAreaRef.current.value = "";
@@ -91,7 +96,7 @@ function ChatForm() {
               right: "0",
               borderRadius: "full",
               aspectRatio: "1/1",
-              p: "7px 7px 0px 6px",
+              p: "7px 7px 4px 6px",
               background: "primaryGradient",
             }}
           >
@@ -126,26 +131,41 @@ const Chat = () => {
         borderColor: "borderColor",
         gap: ["10px", "20px"],
         p: ["10px", "25px"],
-        height: ["auto", "700px"],
+        height: ["auto", "630px"],
         borderRadius: "regular",
         justifyContent: "center",
         width: "370px",
       }}
     >
       <Flex
-        sx={{ width: "100%", alignItems: "center", gap: "10px", ml: "20px" }}
+        sx={{ justifyContent:"space-between", px:"10px" }}
       >
-        <Image
-          src="./img/botPhoto.png"
-          alt="bot photo"
+        <Flex sx={{  alignItems: "center", gap: "10px"}}>
+          <Image
+            src="./img/botPhoto.png"
+            alt="bot photo"
+            sx={{
+              borderRadius: "full",
+              aspectRatio: "1/1",
+              width: "30px",
+              objectFit: "cover",
+            }}
+          />
+          <Text sx={{ fontSize: [0, 1] }}>ServiceBot</Text>
+        </Flex>
+        <IconButton
+          onClick={() => clearHistory()}
           sx={{
-            borderRadius: "full",
-            aspectRatio: "1/1",
-            width: "30px",
-            objectFit: "cover",
+            p:1,
+            color: "secondary",
+            width: ["30px", "35px"],
+            height: ["30px", "35px"],
+            aspectRatio:"1/1",
+            "&:hover": { bg: "backgroundChat", borderRadius:"full", aspectRatio:"1/1" },
           }}
-        />
-        <Text sx={{ fontSize: [0, 1] }}>ServiceBot</Text>
+        >
+          <HiTrash style={{ width: "100%", height: "100%" }} />
+        </IconButton>
       </Flex>
       <hr style={{ border: "1px solid #3f3f46" }} />
       <Flex
@@ -167,55 +187,16 @@ const Chat = () => {
           }}
         >
           {messages.map((entry, i) => (
-            <Message key={entry.id + i} {...entry} scrollToBottom={scrollToBottom} />
+            <Message
+              key={entry.id + i}
+              {...entry}
+              scrollToBottom={scrollToBottom}
+            />
           ))}
           <div ref={messagesEndRef} />
         </Flex>
         <ChatForm />
       </Flex>
-      <Button
-        onClick={() => clearHistory()}
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          border: 1,
-          borderColor: "secondary",
-          p: "10px",
-          width: "100%",
-          minHeight: "55px",
-          borderRadius: "light",
-          gap: "10px",
-          bg: "background",
-          "&:hover": { bg: "backgroundChat" },
-        }}
-      >
-        <Box
-          sx={{
-            color: "secondary",
-            background: "primaryGradient",
-            backgroundClip: "text",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            width: ["18px", "25px"],
-            height: ["18px", "25px"],
-          }}
-        >
-          <HiTrash style={{ width: "100%", height: "100%" }} />
-        </Box>
-        <Text
-          sx={{
-            background: "primaryGradient",
-            backgroundClip: "text",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            fontWeight: "semibold",
-            fontSize: [0, 1],
-          }}
-        >
-          Limpiar Historial
-        </Text>
-      </Button>
     </Flex>
   );
 };

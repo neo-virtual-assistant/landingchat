@@ -40,7 +40,7 @@ const useTypingEffect = ({ text, scrollToBottom }) => {
 };
 
 const TypingEffect = ({ text, scrollToBottom }) => {
-  const { displayText, showCursor } = useTypingEffect({ text, scrollToBottom});
+  const { displayText, showCursor } = useTypingEffect({ text, scrollToBottom });
 
   return (
     <Text
@@ -48,7 +48,7 @@ const TypingEffect = ({ text, scrollToBottom }) => {
         "&::after": {
           content: showCursor ? '"▋"' : '""',
           ml: showCursor ? 1 : "",
-          animate: showCursor ? "typing" : "",
+          animation: showCursor ? "typing" : "",
         },
       }}
     >

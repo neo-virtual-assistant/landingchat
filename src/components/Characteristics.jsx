@@ -13,7 +13,8 @@ import {
 import { Box, Button, Flex, Heading, Text } from "theme-ui";
 import { RiAdminLine } from "react-icons/ri";
 import { BiMessageAltCheck, BiSpreadsheet, BiTrendingUp } from "react-icons/bi";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import autoAnimate from "@formkit/auto-animate";
 
 const cara = [
   {
@@ -100,11 +101,16 @@ const cara = [
 ];
 
 const Cards = ({ id, content, title, imag }) => {
+  const parentRef = useRef();
   const [showMore, setShowMore] = useState(false);
 
   const handleClick = () => {
     setShowMore(!showMore);
   };
+
+  useEffect(() => {
+    parentRef.current && autoAnimate(parentRef.current);
+  }, [parentRef]);
 
   return (
     <Flex
@@ -114,7 +120,12 @@ const Cards = ({ id, content, title, imag }) => {
         maxWidth: "380px",
         width: "100%",
         background: "#1E1E20",
-        p: ["15px 20px 15px 15px", "20px 40px 20px 28px", null, "20px 40px 20px 28px"],
+        p: [
+          "15px 20px 15px 15px",
+          "20px 40px 20px 28px",
+          null,
+          "20px 40px 20px 28px",
+        ],
         borderRadius: "regular",
         height: [
           showMore ? "auto" : "140px",
@@ -128,9 +139,9 @@ const Cards = ({ id, content, title, imag }) => {
       <Box
         sx={{
           color: "primary",
-          width: ["30px","30px","30px","45px"],
-          height: ["30px", "30px" , "30px","45px"],
-          minWidth: ["30px","30px","30px","45px"],
+          width: ["30px", "30px", "30px", "45px"],
+          height: ["30px", "30px", "30px", "45px"],
+          minWidth: ["30px", "30px", "30px", "45px"],
         }}
       >
         {imag}
@@ -140,7 +151,7 @@ const Cards = ({ id, content, title, imag }) => {
           as="span"
           sx={{
             fontWeight: "bold",
-            fontSize: [1,1,2,2],
+            fontSize: [1, 1, 2, 2],
             background: "primaryGradient",
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
@@ -150,21 +161,25 @@ const Cards = ({ id, content, title, imag }) => {
           {title}
         </Text>
         <Text
+          ref={parentRef}
           as="p"
           sx={{
-            fontSize: [0,0,1,1],
+            fontSize: [0, 0, 1, 1],
             display: "flex",
             flexDirection: "column",
             gap: "5px",
           }}
         >
-          {showMore
-            ? content
-            : `${
-                content.length > 80
-                  ? `${content.substring(0, 80)}...`
-                  : content.substring(0, 80)
-              }`}
+          {showMore ? (
+            <Text>{content}</Text>
+          ) : (
+            `${
+              content.length > 80
+                ? `${content.substring(0, 80)}...`
+                : content.substring(0, 80)
+            }`
+          )}
+
           {content.length > 80 ? (
             <Button
               onClick={() => handleClick()}

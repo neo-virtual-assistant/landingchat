@@ -1,8 +1,8 @@
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { useState } from "react";
+import { BsCalendarDate, BsThreeDotsVertical } from "react-icons/bs";
+import { useEffect, useRef, useState } from "react";
 import { useMessageStore } from "@/store/messages";
-import { Button, Flex, Heading, Text } from "theme-ui";
-import { IoMdChatboxes } from "react-icons/io";
+import { Box, Button, Flex, Heading, Link, Text } from "theme-ui";
+import autoAnimate from "@formkit/auto-animate";
 
 const DataOfEmbedding = ({ title, content, similarity }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,13 +11,19 @@ const DataOfEmbedding = ({ title, content, similarity }) => {
     setIsOpen(!isOpen);
   };
 
+  const parentRef = useRef();
+  useEffect(() => {
+    parentRef.current && autoAnimate(parentRef.current);
+  }, [parentRef]);
+
   return (
     <Flex
+      ref={parentRef}
       sx={{
         flexDirection: "column",
-        gap: ["10px","10px","10px","20px"],
+        gap: ["10px", "10px", "10px", "20px"],
         minWidth: "300px",
-        maxWidth: "350px"
+        maxWidth: "350px",
       }}
     >
       <Button
@@ -25,11 +31,16 @@ const DataOfEmbedding = ({ title, content, similarity }) => {
         sx={{
           display: "flex",
           borderRadius: "full",
-          bg: ["backgroundChat", "backgroundChat", "backgroundChat","background"],
-          p:"10px 15px",
+          bg: [
+            "backgroundChat",
+            "backgroundChat",
+            "backgroundChat",
+            "background",
+          ],
+          p: "10px 15px",
           "&:hover": { bg: "backgroundChat", borderRadius: "full" },
           gap: "10px",
-          alignItems: "flex-start",
+          alignItems: ["center", "", "", "flex-start"],
           width: "auto",
         }}
       >
@@ -49,7 +60,14 @@ const DataOfEmbedding = ({ title, content, similarity }) => {
         </Heading>
       </Button>
       {isOpen && (
-        <Flex sx={{ flexDirection: "column", fontSize: 1, gap: "20px", p:"0px 20px"}}>
+        <Flex
+          sx={{
+            flexDirection: "column",
+            fontSize: 1,
+            gap: "20px",
+            p: "0px 20px",
+          }}
+        >
           <Text as="p">{content}</Text>
           <Text
             sx={{
@@ -68,11 +86,18 @@ const DataOfEmbedding = ({ title, content, similarity }) => {
 
 const Documents = () => {
   const embeddings = useMessageStore((state) => state.embeddings);
-  
+
+  const parentRef = useRef();
+
+  useEffect(() => {
+    if (parentRef.current) {
+      autoAnimate(parentRef.current);
+    }
+  }, [parentRef]);
 
   return (
-    <Flex sx={{ gap: "40px", flexDirection: "column" }}>
-      <Heading
+    <Flex sx={{ gap: "40px", flexDirection: "column", alignItems: "center" }}>
+      {/* <Heading
         as="h1"
         sx={{
           fontSize: [4, 5, 6, 6],
@@ -83,15 +108,16 @@ const Documents = () => {
         }}
       >
         Documentos Usados
-      </Heading>
+      </Heading> */}
       <Flex
+        ref={parentRef}
         sx={{
           flexDirection: ["row", null, null, "column"],
-          gap: ["10px","10px","20px"],
+          gap: ["10px", "10px", "20px"],
           height: "auto",
           width: "100%",
           overflowX: ["auto", null, null, "none"],
-          p:"10px"
+          p: "10px",
         }}
       >
         {embeddings.map((entry) => (
@@ -101,8 +127,10 @@ const Documents = () => {
           />
         ))}
       </Flex>
-      <Flex
+      <Link
+        href="https://zeeg.me/kleber/ventas"
         sx={{
+          display: "flex",
           alignItems: "center",
           gap: "20px",
           background: "primaryGradient",
@@ -113,14 +141,20 @@ const Documents = () => {
           maxWidth: "420px",
         }}
       >
-        <IoMdChatboxes
-          style={{ width: "30px", height: "auto", minWidth: "30px" }}
-        />
-        <Text sx={{ fontSize: ["11px", 0], fontWeight: "bold" }}>
-          Consulta a nuestro asistente virtual para más información sobre
-          nuestra empresa.
+        <Box
+          sx={{
+            height: ["20px", "25px"],
+            width: "auto",
+            minHeight: ["20px", "25px"],
+          }}
+        >
+          <BsCalendarDate style={{ width: "100%", height: "100%" }} />
+        </Box>
+
+        <Text sx={{ fontSize: [0, 1], fontWeight: "semibold" }}>
+          Agenda tu cita
         </Text>
-      </Flex>
+      </Link>
     </Flex>
   );
 };

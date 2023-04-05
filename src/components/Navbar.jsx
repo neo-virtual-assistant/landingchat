@@ -1,7 +1,7 @@
 import { MdOutlineDarkMode } from "react-icons/md";
 import { BiMenu } from "react-icons/bi";
 import { useState } from "react";
-import { Box, Flex, Text, Button, IconButton, NavLink } from "theme-ui";
+import { Box, Flex, Text, Button, IconButton, NavLink, Image } from "theme-ui";
 
 import Sidebar from "./Sidebar";
 import Link from "next/link";
@@ -43,8 +43,8 @@ const Navbar = () => {
       }}
     >
       <Flex sx={{ alignItems: "center" }}>
-        <Text variant="logo">Logo</Text>
-        {Links.map((v) => (
+        <Image src="./img/logo.svg" sx={{ aspectRatio: "1/1", height:"40px"}}/>
+        {/* {Links.map((v) => (
           <Flex
             key={v.name}
             as="nav"
@@ -56,10 +56,10 @@ const Navbar = () => {
               </NavLink>
             </Link>
           </Flex>
-        ))}
+        ))} */}
       </Flex>
       <Flex sx={{ alignItems: "center", gap: 15 }}>
-        <IconButton
+        {/* <IconButton
           sx={{ color: "primary", width: "28px", height: "28px", p: 0 }}
         >
           <MdOutlineDarkMode style={{ width: "100%", height: "100%" }} />
@@ -104,7 +104,7 @@ const Navbar = () => {
           >
             Sign up
           </Button>
-        </Flex>
+        </Flex> */}
       </Flex>
       {showSidebar && <Sidebar setShowSidebar={setShowSidebar} />}
     </Box>
