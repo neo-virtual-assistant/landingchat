@@ -64,7 +64,7 @@ export const useMessageStore = create(
           externalID: null,
         }));
       },
-      sendPrompt: async ({ prompt }) => {
+      sendPrompt: async ({ prompt, intention }) => {
         const messageIAid = get().messages.length + 1;
         let userID = get().externalID;
 
@@ -93,6 +93,7 @@ export const useMessageStore = create(
             body: JSON.stringify({
               prompt: `${prompt}`,
               external_user_id: `web-${userID}`,
+              force_intention: `${intention}`    
             }),
           });
 

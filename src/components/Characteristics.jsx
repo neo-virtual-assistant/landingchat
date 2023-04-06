@@ -1,102 +1,83 @@
+import { BsChatText, BsFileEarmarkText } from "react-icons/bs";
 import {
-  BsAndroid,
-  BsFacebook,
-  BsFillGearFill,
-  BsWhatsapp,
-} from "react-icons/bs";
-import {
-  MdCenterFocusStrong,
-  MdInstallDesktop,
-  MdMultipleStop,
-  MdOutlineWeb,
+  MdFaceRetouchingNatural,
+  MdOutlineIntegrationInstructions,
 } from "react-icons/md";
 import { Box, Button, Flex, Heading, Text } from "theme-ui";
-import { RiAdminLine } from "react-icons/ri";
-import { BiMessageAltCheck, BiSpreadsheet, BiTrendingUp } from "react-icons/bi";
+import { RiCustomerService2Fill } from "react-icons/ri";
 import { useEffect, useRef, useState } from "react";
 import autoAnimate from "@formkit/auto-animate";
+import { HiLanguage } from "react-icons/hi2";
+import { TbStatusChange, TbTextRecognition } from "react-icons/tb";
+import { GoIssueClosed } from "react-icons/go";
 
 const cara = [
   {
     id: 1,
-    title: "Simple y al grano",
-    imag: <MdCenterFocusStrong style={{ height: "100%", width: "100%" }} />,
+    title: "Lenguaje natural",
+    imag: <HiLanguage style={{ height: "100%", width: "100%" }} />,
     content:
-      "Tus clientes quieren comprar y tu quieres vender, la mayoría de tiendas online dan rodeos y tienen elementos innecesarios, WhatShop va al grano",
+      "Una IA que entiende y responde en Lenguaje natural para tu negocio (GPT3.5 y GPT4)",
   },
   {
     id: 2,
-    title: "Tu propio sitio web",
-    imag: <MdOutlineWeb style={{ height: "100%", width: "100%" }} />,
+    title: "Atención 24/7",
+    imag: <RiCustomerService2Fill style={{ height: "100%", width: "100%" }} />,
     content:
-      "Es tu propia tienda online individual y privada, no es una plataforma donde hay varios negocios, es una plataforma dedicada unicamente para tu negocio con tu logo y nombre",
+      "Brinda atención 24/7 a tus usuarios como si fuera un humano quien está atendiendo a todos los mensajes que te llegan",
   },
   {
     id: 3,
-    title: "Simple Whatsapp",
-    imag: <BsWhatsapp style={{ height: "100%", width: "100%" }} />,
+    title: "Mucha Información",
+    imag: <BsFileEarmarkText style={{ height: "100%", width: "100%" }} />,
     content:
-      "Deja los sistemas complicados, whatsapp es la forma más sencilla de comunicarse con los clientes, whatShop permite que los pedidos te llegan al whatsapp",
+      "Sube toda la información de tu negocio como preguntas frecuentes, productos, servicios, para que la IA pueda aprender y responder en base a esa información",
   },
   {
     id: 4,
-    title: "App Progresiva PWA",
-    imag: <BsAndroid style={{ height: "100%", width: "100%" }} />,
-    content: "WhatShop también te permite tener tu propia aplicación móvil",
+    title: "Restricción de Conversación",
+    imag: <GoIssueClosed style={{ height: "100%", width: "100%" }} />,
+    content:
+      "Tu IA sólo conversará sobre los temas indicados, no responderá sobre temas que no tienen que ver con tu negocio",
   },
   {
     id: 5,
-    imag: <RiAdminLine style={{ height: "100%", width: "100%" }} />,
-    title: "Simple administración",
-    content: "Sube tus productos de forma simple",
+    title: "Detección de Intenciones",
+    imag: <BsChatText style={{ height: "100%", width: "100%" }} />,
+    content:
+      "Detecta con inteligencia artificial las intenciones de las conversaciones, para clasificar las conversaciones y saber qué es lo que tus usuarios consultan por chat",
   },
   {
     id: 6,
-    title: "Sitio web veloz",
-    imag: <BiMessageAltCheck style={{ height: "100%", width: "100%" }} />,
+    title: "Módulo de comportamientos",
+    imag: <MdFaceRetouchingNatural style={{ height: "100%", width: "100%" }} />,
     content:
-      "La mayoría de sitios web cargan lento, WhatShop es instantáneo y permite una navegación cómoda",
+      "La IA puede comportarse de una forma distinta según la circunstancia, puede ser un vendedor, un reclutador de personal, alguien de soporte técnico, etc",
   },
   {
     id: 7,
-    title: "Instalación rápida",
-    imag: <MdInstallDesktop style={{ height: "100%", width: "100%" }} />,
+    title: "Extracción de Información",
+    imag: <TbTextRecognition style={{ height: "100%", width: "100%" }} />,
     content:
-      "Te lo instalamos en una hora, la mayoría de sitios web tardan semanas en estar listas (y con fallos)",
+      "Extrae la información de conversaciones naturales y obtén sólo aquellos datos que necesitas en el formato que necesitas",
   },
   {
     id: 8,
-    title: "Escalable",
-    imag: <BiTrendingUp style={{ height: "100%", width: "100%" }} />,
+    title: "Omnicanalidad",
+    imag: <TbStatusChange style={{ height: "100%", width: "100%" }} />,
     content:
-      "Otros servicios ofrecen una tienda online que nunca más será actualizada, WhatShop cada vez tiene más beneficios y al mismo precio",
+      "Instala el Bot en cualquier plataforma de chat: whatsapp, messenger, instagram, webchat, telegram, comentarios de Facebook, Google Business",
   },
   {
     id: 9,
-    title: "Soporte técnico",
-    imag: <BsFillGearFill style={{ height: "100%", width: "100%" }} />,
-    content: "Soporte técnico de bugs y asesoría",
-  },
-  {
-    id: 10,
-    title: "Conecta Google Sheet",
-    imag: <BiSpreadsheet style={{ height: "100%", width: "100%" }} />,
+    title: "Integraciones",
+    imag: (
+      <MdOutlineIntegrationInstructions
+        style={{ height: "100%", width: "100%" }}
+      />
+    ),
     content:
-      "Todos tus pedidos se registrarán automáticamente en una hoja de Google Sheet (excel)",
-  },
-  {
-    id: 11,
-    title: "Pixel de Facebook",
-    imag: <BsFacebook style={{ height: "100%", width: "100%" }} />,
-    content:
-      "Instalación de tu pixel de Facebook, para medir estadísticas de tu sitio web y hacer re-marketing en Facebook",
-  },
-  {
-    id: 12,
-    title: "Multi Líneas Whatsapp",
-    imag: <MdMultipleStop style={{ height: "100%", width: "100%" }} />,
-    content:
-      "Con WhatShop una misma tienda online puede recibir pedidos a distintos números de whatsapp, muy útil para negocios con varios vendedores",
+      "Integra sistemas que ya tienes como Shopify, woocomerce, CRMs, etc.",
   },
 ];
 
@@ -175,7 +156,7 @@ const Cards = ({ id, content, title, imag }) => {
           ) : (
             `${
               content.length > 80
-                ? `${content.substring(0, 80)}...`
+                ? `${content.substring(0, 70)}...`
                 : content.substring(0, 80)
             }`
           )}

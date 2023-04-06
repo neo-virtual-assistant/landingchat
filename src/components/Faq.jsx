@@ -1,32 +1,43 @@
+import { useMessageStore } from "@/store/messages";
 import { Box, Button, Flex, Heading, Text } from "theme-ui";
 
 const questions = [
   {
     id: 1,
     title: "¿Cuales son los precios del servicio?",
+    intention: "precios",
   },
   {
     id: 2,
     title: "Deseo agendar una reunion",
+    intention: "agendar_reunion",
   },
   {
     id: 3,
     title: "¿Como puedo trabajar con ustedes?",
+    intention: "trabajo",
   },
   {
     id: 4,
     title: "¿Das cursos?",
+    intention: "cursos",
   },
 ];
 
 const Faq = () => {
+  const sendPrompt = useMessageStore((state) => state.sendPrompt);
+
+  const handleSubmit = (prompt , intention) => {
+    sendPrompt({ prompt, intention });
+  };
+
   return (
     <Flex
       sx={{
         flexDirection: "column",
         maxWidth: "500px",
         gap: "30px",
-        p: ["15px 0px","25px 0px","25px 0px","40px 0px"],
+        p: ["15px 0px", "25px 0px", "25px 0px", "40px 0px"],
       }}
     >
       <Flex sx={{ flexDirection: "column", gap: "15px" }}>
@@ -55,8 +66,11 @@ const Faq = () => {
           overflowX: ["auto", null, null, "none"],
         }}
       >
-        {questions.map(({ id, title }) => (
+        {questions.map(({ id, title, intention }) => (
           <Button
+            onClick={() => {
+              handleSubmit( title, intention);
+            }}
             key={id}
             sx={{
               minWidth: ["350px", "350px", "350px", "auto"],

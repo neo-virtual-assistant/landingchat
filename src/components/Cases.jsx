@@ -1,26 +1,40 @@
-import { Box, Button, Flex, Heading, Image, Text } from "theme-ui";
+import { AspectRatio, Box, Button, Flex, Heading, Image, Text } from "theme-ui";
 
 const cardsUse = [
   {
     id: 1,
     img: "img/bussines.svg",
-    title: "Empresas de seguro",
+    title: "Empresas de seguros",
     content:
-      "Usa el bot para explicar a tus clientes clausulas complejas de contrato",
+      "Explica contratos complejos a tus asegurados, los contratos siempre suelen ser difíciles de Explicar, suelen tener muchas preguntas y las consultas de los usuarios pueden ser bastante complejas, es algo que hasta ahora si o si necesitaba de la ayuda de un humano, pero ahora podrás subir todos tus contratos y tus asegurados podrán preguntar y la AI será capaz de responder en base a dicha información",
   },
   {
     id: 2,
-    img: "img/shopCart.svg",
-    title: "Catálogo de productos",
+    img: "img/faq.svg",
+    title: "Preguntas frecuentes",
     content:
-      "Sus clientes pueden ver la lista de productos con sus respectivos precios y descripciones",
+      "En muchos negocios las consultas de los clientes suelen ser las mismas y repetitivas, aveces añadiendo un detalle extra que necesita la atención de humanos, sin embargo ahora todas esas preguntas frecuentes las puede responder la AI",
   },
   {
     id: 3,
-    img: "img/shopping.svg",
-    title: "Carrito de compras",
+    img: "img/shopcart.svg",
+    title: "Ecommerce pedidos",
     content:
-      "Sus clientes podrán seleccionar sus productos, seleccionar cantidades o variantes de sus productos ( talla, tamaño, color)",
+      'para los que tienen Ecommerce una de las consultas más frecuentes es los estados de los pedidos "dónde está mi pedido?" y responder esto suele ser muy laborioso, ahora gracias a la AI más nuestras integraciones de nuestra plataforma podrás responder a tus clientes el estado del pedido en lenguaje natural',
+  },
+  {
+    id: 4,
+    img: "img/lead.svg",
+    title: "Captura de Lead",
+    content:
+      "Muchos negocios recurren a los formularios para poder obtener un Lead de un cliente, preguntando datos del usuario, ahora podrás preguntar a tus clientes en lenguaje natural y obtener la información de dicho Lead y subirlo en alguna base de datos, poder extraer los datos importantes en el formato correcto",
+  },
+  {
+    id: 5,
+    img: "img/info.svg",
+    title: "Consulta de información",
+    content:
+      "En realidad hay muchos casos de usos y ponerlos todos acá sería bastante, básicamente tus usuarios podrán consultar casi cualquier tipo de información que pueda ser descrito en Texto",
   },
 ];
 
@@ -44,7 +58,14 @@ const Cases = () => {
           David AI
         </Text>
       </Heading>
-      <Flex sx={{ gap: "30px", justifyContent: "center", flexWrap:"wrap", mb: "30px" }}>
+      <Flex
+        sx={{
+          gap: "30px",
+          justifyContent: "center",
+          flexWrap: "wrap",
+          mb: "30px",
+        }}
+      >
         {cardsUse.map((entry) => (
           <Flex
             key={entry.id}
@@ -59,10 +80,28 @@ const Cases = () => {
               borderRadius: "regular",
             }}
           >
-            <Image
-              src={entry.img}
-              sx={{ maxWidth: "200px", maxHeight: "150px" }}
-            ></Image>
+            <Box
+              sx={{
+                width: "100%",
+                maxHeight: "180px",
+                minHeight: "180px",
+                p: "20px",
+                "&:hover": {
+                  bg: "backgroundChat",
+                  borderRadius: "light",
+                  aspectRatio: "1/1",
+                },
+              }}
+            >
+              <Image
+                src={entry.img}
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  AspectRatio: "1/1",
+                }}
+              ></Image>
+            </Box>
             <Flex
               sx={{
                 flexDirection: "column",
