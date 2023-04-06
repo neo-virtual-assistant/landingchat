@@ -87,7 +87,7 @@ const Cases = () => {
           </Flex>
         ))}
       </Flex>
-      <Button
+      {/* <Button
         sx={{
           color: "textSecondary",
           p: "10px 50px",
@@ -99,7 +99,7 @@ const Cases = () => {
         }}
       >
         Ver precio y beneficios
-      </Button>
+      </Button> */}
     </Box>
   );
 };

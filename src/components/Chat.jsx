@@ -142,7 +142,7 @@ const Chat = () => {
       >
         <Flex sx={{  alignItems: "center", gap: "10px"}}>
           <Image
-            src="./img/botPhoto.png"
+            src="./img/logo.svg"
             alt="bot photo"
             sx={{
               borderRadius: "full",
