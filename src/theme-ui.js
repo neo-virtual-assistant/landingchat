@@ -8,14 +8,14 @@ export const myTheme = {
     textSecondary: "#18181b",
 
     background: "#18181b",
-    primary: "#5EEAD4",
+    primary: "#FE7A72",
 
     borderColor: "#3f3f46",
 
-    secondary: "#31cfd4",
+    secondary: "#FE7A72",
     muted: "#1f2937",
     primaryGradient:
-      "linear-gradient(307deg, rgba(6, 182, 212, 1) 0%, rgba(94, 234, 212, 1) 100%)",
+      "linear-gradient(307deg, rgba(254, 65, 114, 1) 0%, rgba(254, 178, 114, 1) 100%)",
     backgroundChat: "#27272a",
     // modes: {
     //   light: {

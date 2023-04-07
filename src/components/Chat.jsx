@@ -142,7 +142,7 @@ const Chat = () => {
       >
         <Flex sx={{  alignItems: "center", gap: "10px"}}>
           <Image
-            src="./img/logo.svg"
+            src="./img/botPhoto.png"
             alt="bot photo"
             sx={{
               borderRadius: "full",
@@ -151,7 +151,7 @@ const Chat = () => {
               objectFit: "cover",
             }}
           />
-          <Text sx={{ fontSize: [0, 1] }}>ServiceBot</Text>
+          <Text sx={{ fontSize: [0, 1] }}>NeoBot</Text>
         </Flex>
         <IconButton
           onClick={() => clearHistory()}
