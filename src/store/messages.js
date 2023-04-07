@@ -56,6 +56,7 @@ export const useMessageStore = create(
             "Kleber AI Si te ayuda para dar información de productos, de hecho con productos es una de las cosas más óptimas, incluso es posible hacer cotizaciones y pedidos para ciertos negocios, el usuario podrá preguntar en lenguaje natural sobre un producto y la AI le dará una respuesta buena, incluso será capaz de recomendar productos o compararlos.",
         },
       ],
+      persistandID: uuidv4(),
       externalID: uuidv4(),
       clearHistory: () => {
         set(() => ({
@@ -67,6 +68,7 @@ export const useMessageStore = create(
       sendPrompt: async ({ prompt, intention }) => {
         const messageIAid = get().messages.length + 1;
         let userID = get().externalID;
+        const persistandID = get().persistandID
 
         !userID ? (userID = uuidv4()) : userID;
 
@@ -92,7 +94,7 @@ export const useMessageStore = create(
             method: "POST",
             body: JSON.stringify({
               prompt: `${prompt}`,
-              external_user_id: `web-${userID}`,
+              external_user_id: `web-${persistandID}-${userID}`,
               force_intention: `${intention}`    
             }),
           });
