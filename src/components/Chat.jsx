@@ -1,9 +1,40 @@
 import { useMessageStore } from "@/store/messages";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HiTrash } from "react-icons/hi";
-import { RiSendPlaneFill } from "react-icons/ri";
 import { Box, Textarea, Text, Flex, Image, IconButton, Button } from "theme-ui";
 import TypingEffect from "./TypingEffect";
+import { RiSendPlaneFill } from "react-icons/ri";
+
+const loadingStates = [
+  [true, false, false],
+  [true, true, false],
+  [true, true, true],
+];
+
+function LoadingButton() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setIndex((prevIndex) => {
+        const newIndex = prevIndex + 1;
+        return newIndex > 2 ? 0 : newIndex;
+      });
+    }, 400);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const [, showSecond, showThird] = loadingStates[index];
+
+  return (
+    <Box sx={{ fontSize: [1] }}>
+      <Text>·</Text>
+      <Text sx={{ visibility: !showSecond && "hidden" }}>·</Text>
+      <Text sx={{ visibility: !showThird && "hidden" }}>·</Text>
+    </Box>
+  );
+}
 
 function Message({ ia, message, scrollToBottom }) {
   const textElement = ia ? (
@@ -34,10 +65,14 @@ function Message({ ia, message, scrollToBottom }) {
 
 function ChatForm() {
   const sendPrompt = useMessageStore((state) => state.sendPrompt);
+  const isLoading = useMessageStore((state) => state.loading);
   const textAreaRef = useRef();
 
   const handleSubmit = (e) => {
     e?.preventDefault();
+    if (textAreaRef.current.value == "") return;
+    if (isLoading) return;
+
     const { value } = textAreaRef.current;
     sendPrompt({ prompt: value });
     textAreaRef.current.value = "";
@@ -67,6 +102,7 @@ function ChatForm() {
     >
       <Box
         as="form"
+        disabled={isLoading}
         onSubmit={handleSubmit}
         onKeyDown={handleKeyDown}
         sx={{ position: "relative" }}
@@ -81,26 +117,41 @@ function ChatForm() {
             defaultValue=""
             placeholder="Envia un mensaje"
             sx={{
-              border: "light",
-              borderColor: "borderColor",
+              borderColor: "backgroundChat",
+              borderRadius: "light",
+              height:"auto",
               py: 2,
               px: 3,
               borderRadius: "regular",
+              outline: "none",
+              transition: "border-color 0.3s ease",
+              "&:focus": {
+                borderColor: "primary",
+              },
+              overflow:"hidden"
             }}
           />
           <IconButton
             type="submit"
+            disabled={isLoading}
             sx={{
               position: "absolute",
-              bottom: "0",
-              right: "0",
+              bottom: "2px",
+              right: "2px",
+              height: "27px",
+              width: "27px",
               borderRadius: "full",
               aspectRatio: "1/1",
-              p: "7px 7px 4px 6px",
-              background: "primaryGradient",
+              p: "3px 7px 0px 6px",
+              background: isLoading ? "background" : "primaryGradient",
+              pointerEvents: isLoading ? "none" : "auto",
             }}
           >
-            <RiSendPlaneFill style={{ height: "22px", width: "100%" }} />
+            {isLoading ? (
+              <LoadingButton />
+            ) : (
+              <RiSendPlaneFill style={{ height: "18px", width: "100%" }} />
+            )}
           </IconButton>
         </Box>
       </Box>
@@ -137,10 +188,8 @@ const Chat = () => {
         width: "370px",
       }}
     >
-      <Flex
-        sx={{ justifyContent:"space-between", px:"10px" }}
-      >
-        <Flex sx={{  alignItems: "center", gap: "10px"}}>
+      <Flex sx={{ justifyContent: "space-between", px: "10px" }}>
+        <Flex sx={{ alignItems: "center", gap: "10px" }}>
           <Image
             src="./img/logo.svg"
             alt="bot photo"
@@ -156,12 +205,16 @@ const Chat = () => {
         <IconButton
           onClick={() => clearHistory()}
           sx={{
-            p:1,
+            p: 1,
             color: "secondary",
             width: ["30px", "35px"],
             height: ["30px", "35px"],
-            aspectRatio:"1/1",
-            "&:hover": { bg: "backgroundChat", borderRadius:"full", aspectRatio:"1/1" },
+            aspectRatio: "1/1",
+            "&:hover": {
+              bg: "backgroundChat",
+              borderRadius: "full",
+              aspectRatio: "1/1",
+            },
           }}
         >
           <HiTrash style={{ width: "100%", height: "100%" }} />

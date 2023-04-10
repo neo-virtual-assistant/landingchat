@@ -10,6 +10,7 @@ const messageStorePersistConfig = {
 export const useMessageStore = create(
   persist(
     (set, get) => ({
+      loading: false,
       messages: [
         {
           id: 78378,
@@ -60,6 +61,7 @@ export const useMessageStore = create(
       externalID: uuidv4(),
       clearHistory: () => {
         set(() => ({
+          loading: false,
           messages: [],
           embeddings: [],
           externalID: null,
@@ -68,11 +70,15 @@ export const useMessageStore = create(
       sendPrompt: async ({ prompt, intention }) => {
         const messageIAid = get().messages.length + 1;
         let userID = get().externalID;
-        const persistandID = get().persistandID
+        const persistandID = get().persistandID;
+
+        const testCrypto = crypto.randomUUID();
+        console.log(testCrypto);
 
         !userID ? (userID = uuidv4()) : userID;
 
         set((state) => ({
+          loading: true,
           messages: [
             ...state.messages,
             {
@@ -95,13 +101,15 @@ export const useMessageStore = create(
             body: JSON.stringify({
               prompt: `${prompt}`,
               external_user_id: `web-${persistandID}-${userID}`,
-              force_intention: `${intention}`    
+              force_intention: `${intention}`,
+              webhook: "https://n8n.kleber.digital/webhook/discord-kleberai",
             }),
           });
 
           const json = await response.json();
 
           set((state) => ({
+            loading: false,
             messages: state.messages.map((entry) => {
               if (entry.id === messageIAid) {
                 return {

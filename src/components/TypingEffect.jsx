@@ -9,7 +9,7 @@ const useTypingEffect = ({ text, scrollToBottom }) => {
   useEffect(() => {
     if (!text?.length) return;
 
-    const randomTime = Math.floor(Math.random() * 40) + 15;
+    const randomTime = Math.floor(Math.random() * 10) + 8;
 
     const intervalId = setInterval(() => {
       if (currentIndex >= text.length) {
