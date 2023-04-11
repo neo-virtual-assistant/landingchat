@@ -25,9 +25,10 @@ const questions = [
 ];
 
 const Faq = () => {
+  const isLoading = useMessageStore((state) => state.loading);
   const sendPrompt = useMessageStore((state) => state.sendPrompt);
 
-  const handleSubmit = (prompt , intention) => {
+  const handleSubmit = (prompt, intention) => {
     sendPrompt({ prompt, intention });
   };
 
@@ -68,21 +69,28 @@ const Faq = () => {
       >
         {questions.map(({ id, title, intention }) => (
           <Button
+            disabled={isLoading}
             onClick={() => {
-              handleSubmit( title, intention);
+              handleSubmit(title, intention);
             }}
             key={id}
             sx={{
               minWidth: ["350px", "350px", "350px", "auto"],
               maxWidth: "350px",
-              color: "textSecondary",
+              color: isLoading ? "borderColor" : "textSecondary",
               p: ["8px 20px", "10px 25px", "10px 40px", "10px 40px"],
               marginRight: "auto",
-              background: "primaryGradient",
+              background: isLoading ? "background" : "primaryGradient",
+              pointerEvents: isLoading ? "none" : "auto",
               fontWeight: "medium",
               borderRadius: "full",
               fontSize: [0, 1, 2],
-              "&:hover": { background: "backgroundChat", color: "primary" },
+              boxShadow: isLoading ? "inset 0px 0px 0px 1px #3f3f46" : "",
+              "&:hover": {
+                background: "backgroundChat",
+                color: "primary",
+                
+              },
             }}
           >
             {title}

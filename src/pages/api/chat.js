@@ -1,5 +1,4 @@
 export default async function handler(req, res) {
-
   if (req.method !== "POST") return res.status(405).end();
   const { prompt, external_user_id } = JSON.parse(req.body);
 
@@ -8,7 +7,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch(`https://ai.kleber.digital/get-answer`, {
+    let response;
+    response = await fetch(`https://ai.kleber.digital/get-answer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -17,16 +17,20 @@ export default async function handler(req, res) {
         key: `${process.env.API_KEY}`,
         prompt: `${prompt}`,
         external_user_id: `${external_user_id}`,
+        webhook: "https://n8n.kleber.digital/webhook/discord-kleberai",
       }),
     });
 
-    if (!response.ok) {
-      console.error(response.statusText);
-      return res.status(500).json({ error: "AI api error" });
+    if (response.status == 500) {
+      return res.status(500).json({ response: "Error Interno del Servidor" });
     }
-
-    const json = await response.json();
-    return res.status(200).json({ response: json });
+    if (response.status == 429) {
+      return res.status(429).json({ response: "Demasiadas solicitudes" });
+    }
+    if (response.status == 200) {
+      const json = await response.json();
+      return res.status(200).json({ response: json });
+    }
     
   } catch (e) {
     console.error(e);

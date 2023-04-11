@@ -35,6 +35,11 @@ const useTypingEffect = ({ text, scrollToBottom }) => {
       clearInterval(intervalId);
     };
   }, [text, currentIndex]);
+  useEffect(()=>{
+    setTimeout(()=>{
+      setShowCursor(false)
+    },10000)
+  },[])
 
   return { displayText, showCursor };
 };
@@ -58,3 +63,5 @@ const TypingEffect = ({ text, scrollToBottom }) => {
 };
 
 export default TypingEffect;
+
+

@@ -37,12 +37,34 @@ function LoadingButton() {
 }
 
 function Message({ ia, message, scrollToBottom }) {
+  const [texto, setTexto] = useState();
+  let time;
   const textElement = ia ? (
-    <TypingEffect text={message} scrollToBottom={scrollToBottom} />
+    <TypingEffect text={texto} scrollToBottom={scrollToBottom} />
   ) : (
     message
   );
 
+  const handleClear = () => {
+    clearTimeout(time);
+  };
+  
+  const handleTime = () => {
+    if (!texto) {
+      time = setTimeout(() => {
+        setTexto("errorrrrrr");
+      }, 1000);
+    } else {
+      handleClear();
+    }
+  };
+  
+  useEffect(() => {
+    setTexto(message);
+    handleTime();
+  }, [textElement]);
+  
+  
   return (
     <Box
       sx={{
@@ -119,7 +141,7 @@ function ChatForm() {
             sx={{
               borderColor: "backgroundChat",
               borderRadius: "light",
-              height:"auto",
+              height: "auto",
               py: 2,
               px: 3,
               borderRadius: "regular",
@@ -128,7 +150,7 @@ function ChatForm() {
               "&:focus": {
                 borderColor: "primary",
               },
-              overflow:"hidden"
+              overflow: "hidden",
             }}
           />
           <IconButton
@@ -200,7 +222,7 @@ const Chat = () => {
               objectFit: "cover",
             }}
           />
-          <Text sx={{ fontSize: [0, 1] }}>ServiceBot</Text>
+          <Text sx={{ fontSize: [0, 1] }}>Kleber IA</Text>
         </Flex>
         <IconButton
           onClick={() => clearHistory()}

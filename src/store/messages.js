@@ -72,9 +72,6 @@ export const useMessageStore = create(
         let userID = get().externalID;
         const persistandID = get().persistandID;
 
-        const testCrypto = crypto.randomUUID();
-        console.log(testCrypto);
-
         !userID ? (userID = uuidv4()) : userID;
 
         set((state) => ({
@@ -102,11 +99,14 @@ export const useMessageStore = create(
               prompt: `${prompt}`,
               external_user_id: `web-${persistandID}-${userID}`,
               force_intention: `${intention}`,
-              webhook: "https://n8n.kleber.digital/webhook/discord-kleberai",
             }),
           });
 
+          console.log(response)
+
           const json = await response.json();
+
+          console.log(json)
 
           set((state) => ({
             loading: false,
@@ -114,12 +114,12 @@ export const useMessageStore = create(
               if (entry.id === messageIAid) {
                 return {
                   ...entry,
-                  message: json.response.answer,
+                  message: json.response?.answer || json.response,
                 };
               }
               return entry;
             }),
-            embeddings: json.response.embeddings,
+            embeddings: json.response?.embeddings,
           }));
         } catch (e) {
           console.error("error en messages", e);
