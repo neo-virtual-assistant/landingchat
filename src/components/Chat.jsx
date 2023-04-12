@@ -167,9 +167,9 @@ const Chat = () => {
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
     const { offsetHeight, scrollHeight, scrollTop } = messagesEndRef.current;
-    if (scrollHeight <= scrollTop + offsetHeight + 100) {
+    // if (scrollHeight <= scrollTop + offsetHeight + 100) {
       messagesEndRef.current?.scrollTo(0, scrollHeight);
-    }
+    // }
   };
 
   useEffect(() => {
