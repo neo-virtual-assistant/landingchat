@@ -37,34 +37,12 @@ function LoadingButton() {
 }
 
 function Message({ ia, message, scrollToBottom }) {
-  const [texto, setTexto] = useState();
-  let time;
   const textElement = ia ? (
-    <TypingEffect text={texto} scrollToBottom={scrollToBottom} />
+    <TypingEffect text={message} scrollToBottom={scrollToBottom} />
   ) : (
     message
   );
 
-  const handleClear = () => {
-    clearTimeout(time);
-  };
-  
-  const handleTime = () => {
-    if (!texto) {
-      time = setTimeout(() => {
-        setTexto("errorrrrrr");
-      }, 1000);
-    } else {
-      handleClear();
-    }
-  };
-  
-  useEffect(() => {
-    setTexto(message);
-    handleTime();
-  }, [textElement]);
-  
-  
   return (
     <Box
       sx={{
@@ -78,6 +56,7 @@ function Message({ ia, message, scrollToBottom }) {
         marginRight: ia ? "auto" : "",
         marginLeft: ia ? "" : "auto",
         maxWidth: ["180px", "200px", "240px"],
+        whiteSpace: "pre-line",
       }}
     >
       {textElement}
@@ -187,7 +166,10 @@ const Chat = () => {
 
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView(false, { behavior: "smooth" });
+    const { offsetHeight, scrollHeight, scrollTop } = messagesEndRef.current;
+    if (scrollHeight <= scrollTop + offsetHeight + 100) {
+      messagesEndRef.current?.scrollTo(0, scrollHeight);
+    }
   };
 
   useEffect(() => {
@@ -252,6 +234,7 @@ const Chat = () => {
         }}
       >
         <Flex
+          ref={messagesEndRef}
           sx={{
             flexDirection: "column",
             gap: "10px",
@@ -268,7 +251,6 @@ const Chat = () => {
               scrollToBottom={scrollToBottom}
             />
           ))}
-          <div ref={messagesEndRef} />
         </Flex>
         <ChatForm />
       </Flex>

@@ -22,6 +22,7 @@ const useTypingEffect = ({ text, scrollToBottom }) => {
       if (nextIndex < 0) {
         setDisplayText(text);
         setCurrentIndex(text.length);
+
         return;
       }
 
@@ -30,16 +31,17 @@ const useTypingEffect = ({ text, scrollToBottom }) => {
     }, randomTime);
 
     scrollToBottom();
-
+    
     return () => {
       clearInterval(intervalId);
     };
   }, [text, currentIndex]);
-  useEffect(()=>{
-    setTimeout(()=>{
-      setShowCursor(false)
-    },10000)
-  },[])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowCursor(false);
+    }, 10000);
+  }, []);
 
   return { displayText, showCursor };
 };
@@ -63,5 +65,3 @@ const TypingEffect = ({ text, scrollToBottom }) => {
 };
 
 export default TypingEffect;
-
-

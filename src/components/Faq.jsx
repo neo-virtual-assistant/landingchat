@@ -1,5 +1,5 @@
 import { useMessageStore } from "@/store/messages";
-import { Box, Button, Flex, Heading, Text } from "theme-ui";
+import {  Button, Flex, Heading, Text } from "theme-ui";
 
 const questions = [
   {
