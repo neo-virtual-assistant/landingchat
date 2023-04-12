@@ -4,24 +4,19 @@ import {  Button, Flex, Heading, Text } from "theme-ui";
 const questions = [
   {
     id: 1,
-    title: "¿Cuales son los precios del servicio?",
-    intention: "precios",
-  },
-  {
-    id: 2,
     title: "Deseo agendar una reunion",
     intention: "agendar_reunion",
   },
   {
-    id: 3,
-    title: "¿Como puedo trabajar con ustedes?",
-    intention: "trabajo",
+    id: 2,
+    title: "¿Cuales son los precios del servicio?",
+    intention: "precios",
   },
   {
-    id: 4,
-    title: "¿Das cursos?",
-    intention: "cursos",
+    id: 3,
+    title: "¿De qué trata el servicio?",
   },
+ 
 ];
 
 const Faq = () => {
@@ -54,10 +49,10 @@ const Faq = () => {
         >
           Preguntas sugeridas
         </Heading>
-        <Text sx={{ fontSize: [0, 1, 2] }}>
+        {/* <Text sx={{ fontSize: [0, 1, 2] }}>
           hemos creado una forma rápida y sencilla de obtener respuestas a tus
           dudas más comunes y las hemos organizado en botones de acceso rápido.
-        </Text>
+        </Text> */}
       </Flex>
       <Flex
         sx={{
@@ -75,7 +70,7 @@ const Faq = () => {
             }}
             key={id}
             sx={{
-              minWidth: ["350px", "350px", "350px", "auto"],
+              minWidth: ["80%", "80%", "350px", "auto"],
               maxWidth: "350px",
               color: isLoading ? "borderColor" : "textSecondary",
               p: ["8px 20px", "10px 25px", "10px 40px", "10px 40px"],
