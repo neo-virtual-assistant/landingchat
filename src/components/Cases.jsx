@@ -55,7 +55,7 @@ const Cases = () => {
             WebkitTextFillColor: "transparent",
           }}
         >
-          Kleber AI
+          Kleber IA
         </Text>
       </Heading>
       <Flex
