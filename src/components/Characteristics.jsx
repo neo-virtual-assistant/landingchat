@@ -202,7 +202,7 @@ const Characteristics = () => {
             WebkitTextFillColor: "transparent",
           }}
         >
-          David AI?
+          Kleber AI?
         </Text>
       </Heading>
 
