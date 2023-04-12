@@ -102,11 +102,7 @@ export const useMessageStore = create(
             }),
           });
 
-          console.log(response)
-
           const json = await response.json();
-
-          console.log(json)
 
           set((state) => ({
             loading: false,

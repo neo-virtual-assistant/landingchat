@@ -27,11 +27,15 @@ export default async function handler(req, res) {
     if (response.status == 429) {
       return res.status(429).json({ response: "Demasiadas solicitudes" });
     }
+
+    if (response.status !== 200) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+    
     if (response.status == 200) {
       const json = await response.json();
       return res.status(200).json({ response: json });
     }
-    
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: e });
