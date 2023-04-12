@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useMessageStore } from "@/store/messages";
 import {  Button, Flex, Heading, Text } from "theme-ui";
 
@@ -20,13 +21,23 @@ const questions = [
 ];
 
 const Faq = () => {
+
   const isLoading = useMessageStore((state) => state.loading);
+  const setLoading = useMessageStore((state) => state.setLoading);
   const sendPrompt = useMessageStore((state) => state.sendPrompt);
 
   const handleSubmit = (prompt, intention) => {
     sendPrompt({ prompt, intention });
   };
 
+  useEffect(() => {
+    if(isLoading){
+      setTimeout(() => {
+        console.log("isLoading", isLoading);
+        setLoading();
+      }, 5000);
+    }
+  }, [isLoading]);
   return (
     <Flex
       sx={{
