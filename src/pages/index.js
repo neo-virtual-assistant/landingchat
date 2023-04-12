@@ -17,7 +17,7 @@ export default function Home() {
     <ThemeProvider theme={myTheme}>
       <Layout>
         <Box as="main" sx={{ m: "0 auto", maxWidth: "container", p: "0 20px" }}>
-          {/* <Navbar /> */}
+          <Navbar />
           <DynamicHeader />
           <Characteristics />
           <Cases />
