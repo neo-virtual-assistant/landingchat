@@ -1,9 +1,9 @@
-import { Box, Button, Flex, Heading, Text } from "theme-ui";
+import { Box, Button, Flex, Heading, Link, Text } from "theme-ui";
 import { AiFillCheckCircle } from "react-icons/ai";
 
 const Prices = () => {
   return (
-    <Flex sx={{ flexDirection: "column", gap: "80px", py:"80px" }}>
+    <Flex sx={{ flexDirection: "column", gap: "80px", py: "80px" }}>
       <Flex sx={{ flexDirection: "column", gap: "5px" }}>
         <Heading as="h3" sx={{ fontSize: [4, 5, 5, 5] }}>
           Precios
@@ -14,7 +14,7 @@ const Prices = () => {
           valor por tu dinero.
         </Text>
       </Flex>
-      <Flex sx={{ flexWrap: "wrap", gap:"40px", justifyContent:"center" }}>
+      <Flex sx={{ flexWrap: "wrap", gap: "40px", justifyContent: "center" }}>
         <Flex
           sx={{
             flexDirection: "column",
@@ -25,7 +25,7 @@ const Prices = () => {
             background: "backgroundChat",
             height: "480px",
             borderRadius: "light",
-            mt:"30px"
+            mt: "30px",
           }}
         >
           <Flex sx={{ flexDirection: "column" }}>
@@ -53,16 +53,23 @@ const Prices = () => {
             </Text>
             <Text sx={{ mb: "4px", fontSize: [0, 1, 2, 2] }}>/mes</Text>
           </Flex>
-          <Button
+          <Link
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdn7ZlYoAy58zin2OcUoJjsXIFlbonQpPWI6-mx2Rq82zeCxQ/viewform"
+            target="_blank"
             sx={{
+              display: "flex",
+              justifyContent: "center",
               fontSize: [0],
               color: "background",
               fontWeight: "bold",
               background: "primaryGradient",
+              py: "7px",
+              borderRadius: "4px",
+              fontFamily: "'Open Sans'",
             }}
           >
             Contacto
-          </Button>
+          </Link>
           <hr
             style={{
               border: "none",
@@ -102,16 +109,15 @@ const Prices = () => {
             background: "backgroundChat",
             height: "480px",
             borderRadius: "light",
-            boxShadow:"6px 6px #5EEAD4",
-            
+            boxShadow: "6px 6px #5EEAD4",
           }}
         >
           <Flex sx={{ flexDirection: "column" }}>
             <Text sx={{ fontSize: [2, 3, 3, 3], fontWeight: "bold" }}>
-            Recomendado
+              Recomendado
             </Text>
             <Text sx={{ fontSize: [0, 1, 1, 1], color: "#A1A1AA" }}>
-            Bueno para atención al cliente y ventas
+              Bueno para atención al cliente y ventas
             </Text>
           </Flex>
           <Flex sx={{ alignItems: "flex-end" }}>
@@ -131,16 +137,23 @@ const Prices = () => {
             </Text>
             <Text sx={{ mb: "4px", fontSize: [0, 1, 2, 2] }}>/mes</Text>
           </Flex>
-          <Button
+          <Link
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdn7ZlYoAy58zin2OcUoJjsXIFlbonQpPWI6-mx2Rq82zeCxQ/viewform"
+            target="_blank"
             sx={{
+              display: "flex",
+              justifyContent: "center",
               fontSize: [0],
               color: "background",
               fontWeight: "bold",
               background: "primaryGradient",
+              py: "7px",
+              borderRadius: "4px",
+              fontFamily: "'Open Sans'",
             }}
           >
             Contacto
-          </Button>
+          </Link>
           <hr
             style={{
               border: "none",
@@ -165,7 +178,8 @@ const Prices = () => {
               <AiFillCheckCircle style={{ width: "100%", height: "100%" }} />
             </Box>
             <Text sx={{ fontSize: [0, 1, 1, 1] }}>
-            Whatsapp, Messenger, Instagram, Webchat. bueno para ventas y atención al cliente
+              Whatsapp, Messenger, Instagram, Webchat. bueno para ventas y
+              atención al cliente
             </Text>
           </Flex>
         </Flex>
@@ -180,15 +194,16 @@ const Prices = () => {
             background: "backgroundChat",
             height: "480px",
             borderRadius: "light",
-            mt:"30px"
+            mt: "30px",
           }}
         >
           <Flex sx={{ flexDirection: "column" }}>
             <Text sx={{ fontSize: [2, 3, 3, 3], fontWeight: "bold" }}>
-            Avanzado
+              Avanzado
             </Text>
             <Text sx={{ fontSize: [0, 1, 1, 1], color: "#A1A1AA" }}>
-            Para empresas con mucho volumen de información que necesita automatizaciones y extraer información de los usuarios 
+              Para empresas con mucho volumen de información que necesita
+              automatizaciones y extraer información de los usuarios
             </Text>
           </Flex>
           <Flex sx={{ alignItems: "flex-end" }}>
@@ -208,16 +223,23 @@ const Prices = () => {
             </Text>
             <Text sx={{ mb: "4px", fontSize: [0, 1, 2, 2] }}>/mes</Text>
           </Flex>
-          <Button
+          <Link
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdn7ZlYoAy58zin2OcUoJjsXIFlbonQpPWI6-mx2Rq82zeCxQ/viewform"
+            target="_blank"
             sx={{
+              display: "flex",
+              justifyContent: "center",
               fontSize: [0],
               color: "background",
               fontWeight: "bold",
               background: "primaryGradient",
+              py: "7px",
+              borderRadius: "4px",
+              fontFamily: "'Open Sans'",
             }}
           >
             Contacto
-          </Button>
+          </Link>
           <hr
             style={{
               border: "none",
@@ -242,7 +264,8 @@ const Prices = () => {
               <AiFillCheckCircle style={{ width: "100%", height: "100%" }} />
             </Box>
             <Text sx={{ fontSize: [0, 1, 1, 1] }}>
-            Sincronizar bases de datos (ejemplo: info de productos, clientes, pedidos, blogs, articulos, etc).
+              Sincronizar bases de datos (ejemplo: info de productos, clientes,
+              pedidos, blogs, articulos, etc).
             </Text>
           </Flex>
         </Flex>
