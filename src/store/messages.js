@@ -38,12 +38,11 @@ export const useMessageStore = create(
       },
       setLoading: () => {
         set((state) => {
-          console.log("setLoading",state);
+          console.log("setLoading", state);
           return {
-          
             ...state,
             loading: false,
-          }
+          };
         });
       },
       sendPrompt: async ({ prompt, intention }) => {

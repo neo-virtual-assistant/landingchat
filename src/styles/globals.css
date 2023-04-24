@@ -18,6 +18,10 @@ button {
   cursor: pointer;
 }
 
+textarea {
+  resize: none;
+}
+
 *::-webkit-scrollbar-track {
   background: black;
   border-radius: 15px;

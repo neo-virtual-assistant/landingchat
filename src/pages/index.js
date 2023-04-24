@@ -5,6 +5,7 @@ import { Layout } from "@/components/Layout";
 import dynamic from "next/dynamic";
 import Characteristics from "@/components/Characteristics";
 import Cases from "@/components/Cases";
+import Prices from "@/components/Prices";
 
 
 const DynamicHeader = dynamic(() => import('../components/Header'), {
@@ -19,6 +20,7 @@ export default function Home() {
         <Box as="main" sx={{ m: "0 auto", maxWidth: "container", p: "0 20px" }}>
           {/* <Navbar /> */}
           <DynamicHeader />
+          <Prices />
           <Characteristics />
           <Cases />
         </Box>
