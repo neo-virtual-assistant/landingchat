@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Link, Text } from "theme-ui";
+import { Box, Flex, Heading, Link, Text } from "theme-ui";
 import { AiFillCheckCircle } from "react-icons/ai";
 
 const Prices = () => {
